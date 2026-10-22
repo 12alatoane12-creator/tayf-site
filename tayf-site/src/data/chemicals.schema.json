@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tayf.local/schemas/chemicals.schema.json",
+  "title": "Tayf chemical catalog",
+  "type": "object",
+  "required": ["schemaVersion", "sourceNote", "chemicals"],
+  "properties": {
+    "schemaVersion": { "type": "string", "minLength": 1 },
+    "sourceNote": { "type": "string" },
+    "chemicals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "formula", "cat", "color", "conc", "molar", "phase", "kind", "safety", "source", "version", "molarMassVerified"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+          "name": { "type": "string", "minLength": 1 },
+          "formula": { "type": "string", "minLength": 1 },
+          "cat": { "enum": ["acid", "base", "salt", "indicator"] },
+          "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+          "conc": { "type": "number", "minimum": 0 },
+          "molar": { "type": "number", "exclusiveMinimum": 0 },
+          "phase": { "type": "string" },
+          "kind": { "type": "string" },
+          "safety": { "type": "string" },
+          "source": { "type": "string", "minLength": 1 },
+          "version": { "type": "string", "minLength": 1 },
+          "molarMassVerified": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
